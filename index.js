@@ -1,48 +1,23 @@
-class Contador {
-    constructor(nombre){
-        this.nombre = nombre;
-        this.contadorIndividual = 0;
-    }
+class TicketManager {
+    #precioBaseDeGanancia = 2;
 
-    static contadorGlobal = 0;
-
-    getResponsable(){
-        return this.nombre;
-    }
-
-    contar(){
-        this.contadorIndividual++;
-        Contador.contadorGlobal++;
+    constructor(){
+        this.eventos = [];
     }
     
-    getCuentaIndividual(){
-        return `${this.nombre} tiene #${this.contadorIndividual}`;
-    }
+    agregarEvento(nombre,lugar,precio=50,fecha=new Date()){
+        const evento = {
+            id: this.eventos.lenght 
+            ? this.eventos[this.eventos.lenght-1].id+1
+            : 1,
+            nombre,
+            lugar,
+            precio,
+            fecha,
+            participantes: [],
+        }
 
-    getCuentaGlobal(){
-        return `La cuenta total es #${Contador.contadorGlobal}`;
+
     }
 
 }
-
-const carlos = new Contador("Carlos");
-const laura = new Contador("Laura");
-
-console.log(carlos.getResponsable());
-console.log(laura.getResponsable());
-
-carlos.contar();
-carlos.contar();
-carlos.contar();
-laura.contar();
-laura.contar();
-
-console.log(carlos.getCuentaIndividual());
-console.log(laura.getCuentaIndividual());
-console.log(laura.getCuentaGlobal());
-laura.contar();
-laura.contar();
-laura.contar();
-laura.contar();
-laura.contar();
-console.log(carlos.getCuentaGlobal());
