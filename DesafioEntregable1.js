@@ -74,6 +74,5 @@ console.log("producto 2: ", listaProductos.getProductById(3));
 // ERRORES:
 
 console.log(listaProductos.getProductById(55));
-
-listaProductos.addProduct("producto prueba","Este es un producto de prueba",200, "Sin imágen", "abc123", 25);
-
+listaProductos.addProduct("producto prueba",200,"Sin imágen","abc123",25);
+listaProductos.addProduct("producto prueba","Este es un producto de prueba",200,"Sin imágen","abc123",25);
