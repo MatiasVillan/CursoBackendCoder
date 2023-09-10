@@ -1,4 +1,5 @@
 const fs = require('fs');
+
 class ProductManager {
     
     constructor(path){
@@ -65,6 +66,9 @@ class ProductManager {
             const products = await this.getProducts();
             const newCatalog = products.filter(p=>p.id!==id);
 
+            if (products.length === newCatalog.length)
+                throw new Error('No se eliminó nada. Id de producto inexistente.');
+
             await fs.promises.writeFile(this.path,JSON.stringify(newCatalog));
 
         } catch (error) {
@@ -76,6 +80,9 @@ class ProductManager {
         try{
             const products = await this.getProducts();
             const productIndex = products.findIndex(p=>p.id===id);
+
+            if(productIndex===-1)
+                throw new Error('No se actualizo nada. Id de producto inexistente.');
 
             products[productIndex] = {...products[productIndex], ...obj};
             await fs.promises.writeFile(this.path,JSON.stringify(products));
@@ -151,9 +158,15 @@ const test = async () => {
         "description":"se cambio este campo"
     }
 
-    console.log('modificando 3er producto');
+    console.log('modificando producto id: 3');
     await listaProductos.updateProduct(3, update);
-    console.log("nuevo 3er producto:", await listaProductos.getProductById(3));
+    console.log("nuevo producto id: 3", await listaProductos.getProductById(3));
+
+    //ERRORES
+    //await listaProductos.delProduct(4);
+    //await listaProductos.updateProduct(4, update);
+    await listaProductos.addProduct(update);
+
 }
 
 test();
