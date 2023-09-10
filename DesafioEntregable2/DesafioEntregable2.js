@@ -48,7 +48,7 @@ class ProductManager {
     async getProductById(id){
         try {
             const products = await this.getProducts();
-            const product = this.products.find(p=>p.id === id);
+            const product = products.find(p=>p.id === id);
 
             if(!product)
                 throw new Error('NOT FOUND: El producto solicitado no existe.');
@@ -68,6 +68,19 @@ class ProductManager {
             await fs.promises.writeFile(this.path,JSON.stringify(newCatalog));
 
         } catch (error) {
+            throw error;
+        }
+    }
+
+    async updateProduct(id, obj) {
+        try{
+            const products = await this.getProducts();
+            const productIndex = products.findIndex(p=>p.id===id);
+
+            products[productIndex] = {...products[productIndex], ...obj};
+            await fs.promises.writeFile(this.path,JSON.stringify(products));
+
+        }catch (error){
             throw error;
         }
     }
@@ -133,28 +146,14 @@ const test = async () => {
     await listaProductos.addProduct(producto3);
     console.log("lista con 3 productos:", await listaProductos.getProducts());
 
+    const update = {
+        "title": "titulo modificado",
+        "description":"se cambio este campo"
+    }
+
+    console.log('modificando 3er producto');
+    await listaProductos.updateProduct(3, update);
+    console.log("nuevo 3er producto:", await listaProductos.getProductById(3));
 }
 
 test();
-
-
-
-/* // TESTING:
-
-const listaProductos = new ProductManager();
-console.log("lista vacia: ",listaProductos.getProducts());
-
-listaProductos.addProduct("producto prueba","Este es un producto de prueba",200,"Sin imágen","abc123",25);
-listaProductos.addProduct("producto prueba 2","Este es otro producto de prueba",300,"Sin imágen","123456",100);
-listaProductos.addProduct("Sanguche de milanesa","Excelente",3300,"Sin imágen","codigo",200);
-console.log("lista: ", listaProductos.getProducts());
-
-console.log("producto 1: ", listaProductos.getProductById(1));
-console.log("producto 2: ", listaProductos.getProductById(2));
-console.log("producto 2: ", listaProductos.getProductById(3));
-
-// ERRORES:
-
-console.log(listaProductos.getProductById(55));
-listaProductos.addProduct("producto prueba",200,"Sin imágen","abc123",25);
-listaProductos.addProduct("producto prueba","Este es un producto de prueba",200,"Sin imágen","abc123",25); */
