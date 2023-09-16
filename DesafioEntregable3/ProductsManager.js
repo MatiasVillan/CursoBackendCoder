@@ -6,16 +6,18 @@ class ProductManager {
         this.path = path;
     }
 
-    async getProducts(){
+    async getProducts(query){
+        const { limit } = query;
         try {
             if ( fs.existsSync(this.path) ){
                 const info = await fs.promises.readFile(this.path,'utf-8');
-                return JSON.parse(info);
+                const productList = JSON.parse(info);
+                return limit ? productList.slice(0, limit) : productList;
             } else {
                 return [];
             }
         } catch (error) {
-            throw error;
+            return error;
         }
     }
 
@@ -32,7 +34,7 @@ class ProductManager {
             )
                 throw new Error('Por favor complete toda la información del producto.');
 
-            const products = await this.getProducts();
+            const products = await this.getProducts({});
 
             if(this.#checkCode(obj.code, products))
                 throw new Error('El código del producto ya existe. Por favor verifique la información.');
@@ -42,28 +44,28 @@ class ProductManager {
             await fs.promises.writeFile(this.path,JSON.stringify(products));
             
         } catch (error) {
-            throw error;
+            return error;
         }
     }
 
     async getProductById(id){
         try {
-            const products = await this.getProducts();
+            const products = await this.getProducts({});
             const product = products.find(p=>p.id === id);
-
+  
             if(!product)
-                throw new Error('NOT FOUND: El producto solicitado no existe.');
-    
+                throw new Error('NOT FOUND.');
+            
             return product;
 
         } catch (error) {
-            throw error;
+            return error;
         }
     }
 
     async delProduct(id){
         try {
-            const products = await this.getProducts();
+            const products = await this.getProducts({});
             const newCatalog = products.filter(p=>p.id!==id);
 
             if (products.length === newCatalog.length)
@@ -72,7 +74,7 @@ class ProductManager {
             await fs.promises.writeFile(this.path,JSON.stringify(newCatalog));
 
         } catch (error) {
-            throw error;
+            return error;
         }
     }
 
@@ -88,7 +90,7 @@ class ProductManager {
             await fs.promises.writeFile(this.path,JSON.stringify(products));
 
         }catch (error){
-            throw error;
+            return error;
         }
     }
 
@@ -104,3 +106,4 @@ class ProductManager {
     }
 }
 
+export const productManager = new ProductManager('productos.json');
