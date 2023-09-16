@@ -14,7 +14,7 @@ app.get('/api/products',async(req,res)=>{
         return res.status(200).json({message: "Productos encontrados:", products});
 
     } catch (error) {
-        res.status(500).json({message:error.message});
+        return res.status(500).json({message:error.message});
     }
 });
 
@@ -27,10 +27,10 @@ app.get('/api/products/:id', async(req,res)=>{
             return res.status(400).json({message: 'No existe el producto.'});
         }
 
-        res.status(200).json({message: "Producto encontrado:", product});
+        return res.status(200).json({message: "Producto encontrado:", product});
 
     } catch (error) {
-        res.status(500).json({message:error.message});
+        return res.status(500).json({message:error.message});
     }
 } )
 
