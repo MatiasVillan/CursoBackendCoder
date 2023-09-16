@@ -1,0 +1,16 @@
+{
+  "name": "desafioentregable3",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "DesfioEntregable3.js",
+  "scripts": {
+    "start": "nodemon DesfioEntregable3.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
