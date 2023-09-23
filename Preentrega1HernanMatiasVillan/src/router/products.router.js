@@ -47,7 +47,6 @@ router.post('/', async (req, res) => {
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
-
 })
 
 router.delete('/:id', async (req, res) => {
