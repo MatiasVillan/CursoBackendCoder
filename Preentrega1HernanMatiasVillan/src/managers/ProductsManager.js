@@ -1,16 +1,16 @@
 import fs from 'fs';
 
 class ProductManager {
-    
-    constructor(path){
+
+    constructor(path) {
         this.path = path;
     }
 
-    async getProducts(query){
+    async getProducts(query) {
         const { limit } = query;
         try {
-            if ( fs.existsSync(this.path) ){
-                const info = await fs.promises.readFile(this.path,'utf-8');
+            if (fs.existsSync(this.path)) {
+                const info = await fs.promises.readFile(this.path, 'utf-8');
                 const productList = JSON.parse(info);
                 return limit ? productList.slice(0, limit) : productList;
             } else {
@@ -21,10 +21,10 @@ class ProductManager {
         }
     }
 
-    async addProduct(obj){
+    async addProduct(obj) {
 
         try {
-            if(
+            if (
                 !obj.title ||
                 !obj.description ||
                 !obj.price ||
@@ -36,26 +36,28 @@ class ProductManager {
 
             const products = await this.getProducts({});
 
-            if(this.#checkCode(obj.code, products))
+            if (this.#checkCode(obj.code, products))
                 throw new Error('El código del producto ya existe. Por favor verifique la información.');
 
-            products.push({ id: this.#makeId(products), ...obj });
+            products.push({ id: this.#makeId(products), status: true, ...obj });
 
-            await fs.promises.writeFile(this.path,JSON.stringify(products));
-            
+            await fs.promises.writeFile(this.path, JSON.stringify(products));
+
+            return obj;
+
         } catch (error) {
             return error;
         }
     }
 
-    async getProductById(id){
+    async getProductById(id) {
         try {
             const products = await this.getProducts({});
-            const product = products.find(p=>p.id === id);
-  
-            if(!product)
+            const product = products.find(p => p.id === id);
+
+            if (!product)
                 throw new Error('NOT FOUND.');
-            
+
             return product;
 
         } catch (error) {
@@ -63,15 +65,18 @@ class ProductManager {
         }
     }
 
-    async delProduct(id){
+    async delProduct(id) {
         try {
             const products = await this.getProducts({});
-            const newCatalog = products.filter(p=>p.id!==id);
+            const newCatalog = products.filter(p => p.id !== id);
 
-            if (products.length === newCatalog.length)
+            if (products.length === newCatalog.length) {
                 throw new Error('No se eliminó nada. Id de producto inexistente.');
+                return -1;
+            }
 
-            await fs.promises.writeFile(this.path,JSON.stringify(newCatalog));
+            await fs.promises.writeFile(this.path, JSON.stringify(newCatalog));
+            return 1;
 
         } catch (error) {
             return error;
@@ -79,28 +84,31 @@ class ProductManager {
     }
 
     async updateProduct(id, obj) {
-        try{
-            const products = await this.getProducts();
-            const productIndex = products.findIndex(p=>p.id===id);
+        try {
+            const products = await this.getProducts({});
+            const productIndex = products.findIndex(p => p.id === id);
 
-            if(productIndex===-1)
+            if (productIndex === -1) {
                 throw new Error('No se actualizo nada. Id de producto inexistente.');
+                return -1;
+            }
 
-            products[productIndex] = {...products[productIndex], ...obj};
-            await fs.promises.writeFile(this.path,JSON.stringify(products));
+            products[productIndex] = { ...products[productIndex], ...obj, id: id };
+            await fs.promises.writeFile(this.path, JSON.stringify(products));
+            return 1;
 
-        }catch (error){
+        } catch (error) {
             return error;
         }
     }
 
-    #checkCode(code, products){
-        return products.find(p=>p.code === code);
+    #checkCode(code, products) {
+        return products.find(p => p.code === code);
     }
-    
-    #makeId(products){
-        if(products.length)
-            return products[products.length-1].id + 1;
+
+    #makeId(products) {
+        if (products.length)
+            return products[products.length - 1].id + 1;
         else
             return 1;
     }
