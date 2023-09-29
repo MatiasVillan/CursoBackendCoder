@@ -1,0 +1,102 @@
+[
+    {
+        "id": 1,
+        "title": "Portátil Apple",
+        "description": "Portátil de alto rendimiento con el último procesador.",
+        "price": 999.99,
+        "thumbnail": "Sin imágen",
+        "code": "LT123",
+        "stock": 25,
+        "status": true
+    },
+    {
+        "id": 2,
+        "title": "Teléfono inteligente Samsung",
+        "description": "Teléfono inteligente de gama alta con una impresionante cámara.",
+        "price": 799.99,
+        "thumbnail": "Sin imágen",
+        "code": "SP456",
+        "stock": 30,
+        "status": true
+    },
+    {
+        "id": 3,
+        "title": "Consola de videojuegos Sony",
+        "description": "Consola de videojuegos de próxima generación para experiencias de juego inmersivas.",
+        "price": 499.99,
+        "thumbnail": "Sin imágen",
+        "code": "GC789",
+        "stock": 15,
+        "status": true
+    },
+    {
+        "id": 4,
+        "title": "Audífonos inalámbricos Sony",
+        "description": "Audífonos inalámbricos premium con cancelación de ruido.",
+        "price": 199.99,
+        "thumbnail": "Sin imágen",
+        "code": "WH234",
+        "stock": 40,
+        "status": true
+    },
+    {
+        "id": 5,
+        "title": "Tableta Lenovo",
+        "description": "Tableta elegante para la productividad en movimiento.",
+        "price": 299.99,
+        "thumbnail": "Sin imágen",
+        "code": "TB567",
+        "stock": 20,
+        "status": true
+    },
+    {
+        "id": 6,
+        "title": "Reloj inteligente LG",
+        "description": "Reloj inteligente lleno de características con seguimiento de salud.",
+        "price": 149.99,
+        "thumbnail": "Sin imágen",
+        "code": "SW890",
+        "stock": 35,
+        "status": true
+    },
+    {
+        "id": 7,
+        "title": "Router inalámbrico Cisco",
+        "description": "Router inalámbrico de alta velocidad para una conectividad sin problemas.",
+        "price": 79.99,
+        "thumbnail": "Sin imágen",
+        "code": "WR123",
+        "stock": 10,
+        "status": true
+    },
+    {
+        "id": 8,
+        "title": "Disco duro externo WD",
+        "description": "Disco duro externo de gran capacidad para almacenamiento de datos.",
+        "price": 129.99,
+        "thumbnail": "Sin imágen",
+        "code": "HD456",
+        "stock": 18,
+        "status": true
+    },
+    {
+        "id": 9,
+        "title": "Tarjeta gráfica AMD",
+        "description": "Tarjeta gráfica potente para juegos y creación de contenido.",
+        "price": 399.99,
+        "thumbnail": "Sin imágen",
+        "code": "GC789",
+        "stock": 12,
+        "status": true
+    },
+    {
+        "id": 10,
+        "title": "Ratón inalámbrico Logi",
+        "description": "Ratón inalámbrico ergonómico para mejorar la productividad.",
+        "price": 29.99,
+        "thumbnail": "Sin imágen",
+        "code": "WM567",
+        "stock": 50,
+        "status": true
+    }
+]
