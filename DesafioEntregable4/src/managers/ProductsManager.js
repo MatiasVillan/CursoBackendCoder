@@ -39,11 +39,12 @@ class ProductManager {
             if (this.#checkCode(obj.code, products))
                 throw new Error('El código del producto ya existe. Por favor verifique la información.');
 
-            products.push({ id: this.#makeId(products), status: true, ...obj });
+            const newProduct = { id: this.#makeId(products), status: true, ...obj };
+            products.push( newProduct);
 
             await fs.promises.writeFile(this.path, JSON.stringify(products));
 
-            return obj;
+            return newProduct;
 
         } catch (error) {
             return error;
