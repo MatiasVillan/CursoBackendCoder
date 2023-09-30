@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { __dirname } from '../utils.js';
 
 class CartManager {
 
@@ -84,4 +85,4 @@ class CartManager {
     }
 }
 
-export const cartManager = new CartManager('./src/data/carritos.json');
+export const cartManager = new CartManager(__dirname + '/data/carritos.json');

@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { __dirname } from '../utils.js';
 
 class ProductManager {
 
@@ -115,4 +116,4 @@ class ProductManager {
     }
 }
 
-export const productManager = new ProductManager('./src/data/productos.json');
+export const productManager = new ProductManager(__dirname + '/data/productos.json');
