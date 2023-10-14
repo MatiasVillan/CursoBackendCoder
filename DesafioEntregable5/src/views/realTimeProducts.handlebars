@@ -1,0 +1,39 @@
+<div>
+    <h2>Agregar producto:</h2>
+
+    <form id="form">
+        Titulo: <input type="text" name="title" id="title">
+        Descripcion: <input type="text" name="description" id="description">
+        Precio: <input type="number" name="price" id="price">
+        Foto: <input type="text" name="thumbnail" id="thumbnail">
+        Codigo: <input type="text" name="code" id="code">
+        Stock: <input type="number" name="stock" id="stock">
+        <input type="submit" value="Create">
+    </form>
+
+</div>
+
+<br>
+<table id="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        {{#each products}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{title}}</td>
+                <td>{{description}}</td>
+                <td>$ {{price}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
