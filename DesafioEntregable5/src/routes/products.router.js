@@ -81,11 +81,13 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params;
 
     try {
-        const updated = await productManager.updateProduct(+id, req.body);
+        /* const updated = await productManager.updateProduct(+id, req.body);
 
         if (updated !== 1) {
             return res.status(400).json({ message: 'No se pudo actualizar el producto inexistente.' });
-        }
+        } */
+
+        const updated = await productManager.updateOne(id, req.body);
 
         return res.status(200).json({ message: "Producto actualizado con exito." });
 
