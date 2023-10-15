@@ -34,7 +34,8 @@ socketServer.on('connection', (socket) => {
 
     socket.on('createProduct', async (product) => {
         
-        const newProduct = await productManager.addProduct(product);
+        //const newProduct = await productManager.addProduct(product);
+        const newProduct = await productManager.createOne(product);
         if (newProduct.id)
             socket.emit('productCreated', newProduct);
         

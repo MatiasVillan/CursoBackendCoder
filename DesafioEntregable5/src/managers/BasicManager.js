@@ -5,7 +5,7 @@ export default class BasicManager {
     }
 
     async findAll() {
-        return this.model.find();
+        return this.model.find().lean();
     }
 
     async findById(id) {
@@ -20,7 +20,7 @@ export default class BasicManager {
         return this.model.updateOne({ _id: id }, obj);
     }
 
-    async deleteOne() {
+    async deleteOne(id) {
         return this.model.deleteOne({ _id: id });
     }
 

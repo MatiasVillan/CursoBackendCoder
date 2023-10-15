@@ -27,11 +27,11 @@ form.onsubmit = (e) => {
 
 socketClient.on('productCreated', (product) => {
 
-    const { id, title, description, price } = product;
+    const { _id, title, description, price } = product;
 
     const row = `
     <tr>
-        <td>${id}</td>
+        <td>${_id}</td>
         <td>${title}</td>
         <td>${description}</td>
         <td>$ ${price}</td>
