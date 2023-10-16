@@ -6,7 +6,6 @@ const router = Router();
 router.get('/home', async (req, res) => {
     //const products = await productManager.getProducts({});
     const products = await productManager.findAll();
-    console.log(products) ////
 
     res.render('home', { products: products });
 });
