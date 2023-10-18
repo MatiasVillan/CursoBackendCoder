@@ -7,6 +7,7 @@ import { __dirname } from './utils.js';
 import { Server } from 'socket.io';
 import { productManager } from './managers/ProductsManager.js';
 import "./db/configDB.js"
+import { messagesManager } from './managers/MessagesManager.js';
 
 const app = express();
 const PORT = 8080;
@@ -33,11 +34,20 @@ socketServer.on('connection', (socket) => {
     console.log("Client connected", socket.id);
 
     socket.on('createProduct', async (product) => {
-        
         //const newProduct = await productManager.addProduct(product);
         const newProduct = await productManager.createOne(product);
         if (newProduct.id)
             socket.emit('productCreated', newProduct);
-        
     })
-})
+
+    socket.on('newUser', (user) => {
+        socket.broadcast.emit("newUserBroadcast", user);
+    });
+
+    socket.on('message', async info => {
+        await messagesManager.createOne(info);
+        const messages = await messagesManager.findAll();
+
+        socket.emit('chat', messages);
+    });
+});
