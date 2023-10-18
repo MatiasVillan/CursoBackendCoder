@@ -44,10 +44,10 @@ socketServer.on('connection', (socket) => {
         socket.broadcast.emit("newUserBroadcast", user);
     });
 
-    socket.on('message', async info => {
+    socket.on('message', async (info) => {
         await messagesManager.createOne(info);
         const messages = await messagesManager.findAll();
 
-        socket.emit('chat', messages);
+        socketServer.emit('chat', messages);
     });
 });

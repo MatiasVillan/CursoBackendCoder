@@ -39,8 +39,7 @@ form.onsubmit = (e) => {
     socketClient.emit('message', infoMessage);
 };
 
-socketClient.on('chat', info => {
-    
+socketClient.on("chat", (info) => {
     const chat = info.map( messageObj => `<p>${messageObj.user} dijo: ${messageObj.message}</p>` ).join(' ');
 
     divChat.innerHTML = chat;
