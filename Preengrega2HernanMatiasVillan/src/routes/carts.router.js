@@ -54,7 +54,7 @@ router.get('/', async (req, res) => {
             return res.status(400).json({ message: 'No existe ningun carrito.' });
         } */
 
-        const carts = await cartManager.findAll();
+        const carts = await cartManager.findAllCarts();
 
         return res.status(200).json({ message: "Mostrando todos los carritos:", carts });
 
