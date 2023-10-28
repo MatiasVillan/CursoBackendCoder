@@ -3,7 +3,7 @@ import BasicManager from "./BasicManager.js";
 
 class MessagesManager extends BasicManager {
 
-    constructor(path) {
+    constructor() {
         super(messagesModel);
     }
 }

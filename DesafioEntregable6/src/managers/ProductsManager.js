@@ -3,7 +3,7 @@ import BasicManager from './BasicManager.js';
 
 class ProductManager extends BasicManager {
 
-    constructor(path) {
+    constructor() {
         super(productsModel);
     }
 

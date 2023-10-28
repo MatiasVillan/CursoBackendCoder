@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { productManager } from '../managers/ProductsManager.js';
-import { messagesManager } from '../managers/MessagesManager.js';
 
 const router = Router();
 
@@ -19,6 +18,14 @@ router.get('/realtime', async (req, res) => {
 
 router.get('/chat', (req, res) => {
     res.render('chat');
+});
+
+router.get('/', (req,res) => {
+    res.render("login");
+});
+
+router.get('/signup', (req,res) => {
+    res.render("signup");
 });
 
 export default router;

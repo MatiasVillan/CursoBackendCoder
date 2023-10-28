@@ -5,7 +5,7 @@ import { productsModel } from '../db/models/products.model.js';
 
 class CartManager extends BasicManager {
 
-  constructor(path) {
+  constructor() {
     super(cartsModel);
   }
 
