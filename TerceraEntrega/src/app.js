@@ -12,16 +12,17 @@ import { messagesManager } from './managers/MessagesManager.js';
 import session from "express-session";
 import cookieParser from 'cookie-parser';
 import MongoStore from 'connect-mongo';
+import config from "./config.js"
 
 const app = express();
-const PORT = 8080;
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
-const uri = "mongodb+srv://coderfs:c0d3rfs@cluster0.kykyjfg.mongodb.net/ecommerce?retryWrites=true&w=majority";
+const PORT = config.port;
+const uri = config.mongo_uri;
 
 app.use(session({
     secret: "SECRETKEY",
